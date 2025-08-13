@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Letter to Everyone</title>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary: #ffb6c1;
+            --secondary: #b19cd9;
+            --accent: #a2d5f2;
+            --text: #333333;
+            --light: #ffffff;
+            --dark: #2c2c2c;
+            --shadow: 0 4px 16px rgba(0,0,0,0.08);
+            --transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+        }
+        html, body {
+            height: 100%;
+        }
+        body {
+            min-height: 100vh;
+            background: linear-gradient(120deg, #f7a8b8 0%, #a2d5f2 100%);
+            color: var(--text);
+            font-family: 'Quicksand', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.8;
+            padding-left: 90px;
+            font-size: 1.12rem;
+            transition: background 0.5s;
+        }
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 90px;
+            height: 100vh;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            box-shadow: var(--shadow);
+            z-index: 100;
+            padding-top: 40px;
+        }
+        .nav-item {
+            width: 100%;
+            padding: 18px 0;
+            text-align: center;
+            color: var(--light);
+            cursor: pointer;
+            transition: var(--transition);
+            position: relative;
+            font-size: 1.1rem;
+        }
+        .nav-item i {
+            font-size: 28px;
+            margin-bottom: 6px;
+            transition: var(--transition);
+        }
+        .nav-item span {
+            display: block;
+            font-size: 13px;
+            opacity: 0.8;
+        }
+        .nav-item.active, .nav-item:hover {
+            background-color: rgba(255,255,255,0.18);
+            color: var(--accent);
+        }
+        .nav-item.active i {
+            color: var(--accent);
+            transform: scale(1.15);
+        }
+        .nav-item:not(:last-child) {
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 48px 28px;
+        }
+        section {
+            min-height: 100vh;
+            padding: 60px 0 40px;
+            display: none;
+        }
+        section.active {
+            display: block;
+            animation: fadeIn 0.7s;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(24px);}
+            to { opacity: 1; transform: translateY(0);}
+        }
+        h1 {
+            color: var(--secondary);
+            font-size: 2.7rem;
+            margin-bottom: 32px;
+            text-align: center;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+        h2 {
+            color: var(--primary);
+            font-size: 2rem;
+            margin: 38px 0 18px;
+            font-weight: 500;
+        }
+        h2 {
+            background: #fff;
+            border-radius: 8px;
+            padding: 12px 18px;
+            box-shadow: var(--shadow);
+            margin: 38px 0 18px;
+            font-weight: 500;
+            color: var(--primary);
+            font-size: 1.3rem;
+            display: inline-block;
+            }
+        h3 {
+            color: var(--secondary);
+            font-size: 1.35rem;
+            margin: 28px 0 12px;
+        }
+        p {
+            margin-bottom: 18px;
+            font-size: 1.13rem;
+        }
+        .hero {
+            text-align: center;
+            padding: 60px 0 40px;
+        }
+        .hero h1 {
+            font-size: 3.1rem;
+            margin-bottom: 18px;
+            line-height: 1.18;
+        }
+        .hero p {
+            font-size: 1.35rem;
+            max-width: 700px;
+            margin: 0 auto 38px;
+        }
+        .pronouns {
+            display: inline-block;
+            background-color: var(--accent);
+            color: var(--light);
+            padding: 8px 22px;
+            border-radius: 30px;
+            font-weight: bold;
+            margin: 20px 0;
+            font-size: 1.15rem;
+            box-shadow: var(--shadow);
+        }
+        .trans-flag {
+            height: 50px;
+            width: 100%;
+            background: linear-gradient(
+                to bottom,
+                #55cdfc 20%,
+                #f7a8b8 20% 40%,
+                white 40% 60%,
+                #f7a8b8 60% 80%,
+                #55cdfc 80%
+            );
+            border-radius: 5px;
+            margin: 30px 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+        }
+        .letter {
+            background-color: rgba(255,255,255,0.85);
+            border-radius: 12px;
+            padding: 44px 38px;
+            box-shadow: var(--shadow);
+            margin: 40px 0;
+            border-left: 6px solid var(--primary);
+        }
+        .letter-signature {
+            font-style: italic;
+            text-align: right;
+            margin-top: 38px;
+            font-size: 1.25rem;
+            color: var(--secondary);
+        }
+        .qa-section {
+            margin: 48px 0;
+        }
+        .qa-category {
+            margin-bottom: 54px;
+        }
+        .qa-item {
+            margin-bottom: 28px;
+            background-color: rgba(255,255,255,0.85);
+            border-radius: 10px;
+            padding: 24px 22px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+        .qa-item:hover {
+            box-shadow: 0 8px 24px rgba(178,156,217,0.08);
+            transform: translateY(-2px) scale(1.01);
+        }
+        .qa-question {
+            font-weight: bold;
+            color: var(--secondary);
+            font-size: 1.22rem;
+            margin-bottom: 13px;
+            display: flex;
+            align-items: center;
+        }
+        .qa-question i {
+            margin-right: 10px;
+            color: var(--primary);
+        }
+        .qa-answer {
+            padding-left: 35px;
+        }
+        .poetry-section {
+            margin: 54px 0;
+            font-style: italic;
+            line-height: 1.8;
+        }
+        .poem {
+            margin-bottom: 38px;
+            padding-left: 20px;
+            border-left: 3px solid var(--primary);
+            background: rgba(255,255,255,0.7);
+            border-radius: 7px;
+            box-shadow: var(--shadow);
+            padding-top: 10px;
+            padding-bottom: 10px;
+        }
+        .poem-title {
+            font-weight: bold;
+            color: var(--secondary);
+            margin-bottom: 8px;
+            font-size: 1.1rem;
+        }
+        .button {
+            display: inline-block;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: white;
+            padding: 15px 34px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            margin: 22px 7px;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            box-shadow: var(--shadow);
+            font-size: 1.13rem;
+            letter-spacing: 0.5px;
+            position: relative;
+            overflow: hidden;
+        }
+        .button:after {
+            content: '';
+            position: absolute;
+            left: 0; top: 0;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0.04) 100%);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .button:hover {
+            transform: translateY(-3px) scale(1.04);
+            box-shadow: 0 6px 18px rgba(178,156,217,0.13);
+        }
+        .button:hover:after {
+            opacity: 1;
+        }
+        .resources-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 28px;
+            margin: 40px 0;
+        }
+        .resource-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 26px 22px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border-left: 5px solid var(--accent);
+        }
+        .resource-card:hover {
+            transform: translateY(-5px) scale(1.03);
+            box-shadow: 0 10px 24px rgba(162,213,242,0.12);
+        }
+        .resource-card h3 {
+            color: var(--secondary);
+            margin-bottom: 13px;
+        }
+        .resource-card a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: bold;
+            transition: var(--transition);
+        }
+        .resource-card a:hover {
+            text-decoration: underline;
+            color: var(--accent);
+        }
+        .heart {
+            color: #ff6b6b;
+            animation: heartbeat 1.5s infinite;
+        }
+        @keyframes heartbeat {
+            0% { transform: scale(1);}
+            25% { transform: scale(1.1);}
+            50% { transform: scale(1);}
+            75% { transform: scale(1.1);}
+            100% { transform: scale(1);}
+        }
+        .highlight {
+            background-color: rgba(178,156,217,0.18);
+            padding: 2px 5px;
+            border-radius: 3px;
+        }
+        /* Responsive adjustments */
+        @media (max-width: 900px) {
+            .container {
+                padding: 24px 10px;
+            }
+        }
+        @media (max-width: 768px) {
+            body {
+                padding-left: 0;
+                padding-bottom: 60px;
+            }
+            
+            .sidebar {
+                width: 100%;
+                height: 60px;
+                bottom: 0;
+                top: auto;
+                flex-direction: row;
+                justify-content: space-around;
+                padding-top: 0;
+                box-shadow: 0 -2px 12px rgba(0,0,0,0.07);
+            }
+            .nav-item {
+                padding: 10px 0;
+                font-size: 1rem;
+            }
+            .nav-item span {
+                display: none;
+            }
+            .container {
+                padding: 18px 7px;
+            }
+            section {
+                min-height: auto;
+                padding: 32px 0 18px;
+            }
+            h1 {
+                font-size: 2rem;
+            }
+            h2 {
+                font-size: 1.3rem;
+            }
+            .letter {
+                padding: 18px 8px;
+            }
+            .hero h1 {
+                font-size: 2.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating Sidebar Navigation -->
+    <div class="sidebar">
+        <div class="nav-item active" data-section="letter" title="My Letter">
+            <i class="fas fa-envelope-open-text"></i>
+            <span>My Letter</span>
+        </div>
+        <div class="nav-item" data-section="qa" title="Q&A">
+            <i class="fas fa-question-circle"></i>
+            <span>Q&A</span>
+        </div>
+        <div class="nav-item" data-section="poetry" title="Poetry">
+            <i class="fas fa-pen-fancy"></i>
+            <span>Poetry</span>
+        </div>
+        <div class="nav-item" data-section="resources" title="Resources">
+            <i class="fas fa-book"></i>
+            <span>Resources</span>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Letter Section -->
+        <section id="letter" class="active">
+            <div class="hero">
+                <h1>To whomever it may concern</h1>
+                <div class="trans-flag"></div>
+            </div>
+            <div class="letter">
+
+                <p>I've tried to write this a thousand times in my head, but the words always got stuck—tangled up in fear and hope and the crushing weight of <em>what if</em>. What if you don't understand? What if this changes everything between us? But I can't stay silent anymore. This isn't a phase or a passing thought. It's who I am, in a way I can't ignore any longer.</p>
+                <p>What I'm about to say might surprise you. If you need to pause, that's okay. Just promise you'll come back to it with an open mind. Please don't shut down. Hear me out.</p>
+                <p>I want to be transgender. Or at the very least, I know I want to live as a girl. Writing that feels terrifying—not because I'm ashamed, but because I'm afraid of losing you. Losing the way you see me. But pretending is breaking me, too.</p>
+                <p>Here's the thing: I don't <em>hate</em> being a boy. It's not like I wake up every day despising my body or my voice. But there's always been this quiet ache, like I'm wearing clothes that don't quite fit. Like I'm watching life through a window, pressed against the glass. When I see girls—how they move, how they laugh, how they exist in the world—it's not just admiration. It's <em>longing</em>. A homesickness for a life I was supposed to have. I don't just think they're pretty; I want to <em>be</em> them. The shape of them, the softness, the way they take up space. I want the long hair, the curves, the way a dress hangs on hips I don't have yet. Sometimes I look at my body and grieve for something I've never even had.</p>
+                <p>And when I let myself imagine it—when I daydream about a different name, a different reflection—it's like an electric jolt of <em>rightness</em>. Like finally scratching an itch I could never reach. It's euphoria. It's <em>me</em>.</p>
+                <p>I'm not giving up being a man like some tragic sacrifice. I'll still mow the grass, still do the heavy lifting (though maybe not <em>too</em> heavy anymore). I'm still <em>me</em>—the same person you've always known. But I'm also uncovering a voice that's been shoved under the rug every time the world demanded masculinity from me. This voice has always been there. I just didn't have the words for it until now.</p>
+                <p>I don't have everything figured out. I don't know how long this will take—months, years, a lifetime. I know the trans community faces cruelty I can't even fathom yet. But I'm not hurting anyone. No one in history has ever died from gender-affirming care. I just want to <em>exist</em> as the person I've always been underneath. To support others like me, and to live without this constant ache of <em>almost</em>.</p>
+                <p>I'm telling you because I love you too much to lie. Because you deserve to know the real me, not the version I built out of fear. I need your support, your love, even your confusion—just not your silence. If you're scared or angry, tell me. Ask me anything. I can take messy. What I can't take is losing you.</p>
+                <p>This isn't an ending. It's me showing up, fully, for the first time. I'm not changing in the ways that matter most—my heart, my memories, the way I love you. If anything, I'm finally giving you the truth.</p>
+                <p>I love you. More than anything. And I hope, more than anything, you'll still love me too.</p>
+
+                <div class="letter-signature">
+                    Always yours,<br>
+                    Aidan
+                </div>
+            </div>
+            <div style="text-align: center;">
+                <button class="button" data-section="qa">Read the Q&A</button>
+            </div>
+        </section>
+
+        <!-- Q&A Section -->
+        <section id="qa">
+            <h1>Understanding My Transition</h1>
+            <p>A complete Q&A with questions I know you'll have about me and the trans community.</p>
+            <div class="trans-flag"></div>
+            <div class="qa-section">
+                <h2>Self-Discovery & Identity</h2>
+
+                <div class="qa-item">
+                    <div class="qa-question">
+                        <i class="fas fa-question"></i>
+                        How do you know you're transgender and not something else?
+                    </div>
+                    <div class="qa-answer">
+                        <p>It's a deep, persistent feeling that my assigned gender doesn't match who I am inside. Small moments—like cringing when called "sir" or feeling euphoria when expressing femininity—keep confirming it. It's not about disliking being male, but about feeling more like myself when I embrace being a woman.</p>
+                    </div>
+                </div>
+                <div class="qa-item">
+                    <div class="qa-question">
+                        <i class="fas fa-question"></i>
+                        When did you realize this?
+                    </div>
+                    <div class="qa-answer">
+                        <p>The signs were always there, but I pushed them away for years. Recently, the discomfort became impossible to ignore. Experimenting with feminine expression (like growing my nails or imagining life as a woman, wearing feminine underwear underneath my masculine clothing [don't worry, Ems, I didn't steal anything from you], etc…) brought me so much joy that I couldn't deny it anymore.</p>
+                    </div>
+                </div>
+                <div class="qa-item">
+                    <div class="qa-question">
+                        <i class="fas fa-question"></i>
+                        Why not just be a feminine man?
+                    </div>
+                    <div class="qa-answer">
+                        <p>I've asked myself that too. But femininity is just one part—it's about my core identity. I don't just want to do feminine things; I want to be a woman. When I picture my future, I see myself living authentically as a female.</p>
+                    </div>
+                </div>
+                <div class="qa-item">
+                    <div class="qa-question">
+                        <i class="fas fa-question"></i>
+                        What is your full profile?
+                    </div>
+                    <div class="qa-answer">
+                        <p>I am currently a <span class="highlight">genderqueer [questioning gender] pansexual [sexually attracted to all gender/sexualities] AMAB [assigned male at birth]</span> with plans to transition into womanhood through <span class="highlight">HRT [Hormone Replacement Therapy] and MTBs [Male Testosterone Blockers]</span> to become a true transgender female.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="qa-section">
+                <h2>Transition Plans</h2>
+                <div class="qa-item">
+                    <div class="qa-question">
+                        <i class="fas fa-question"></i>
+                        What changes do you want to make?
+                    </div>
+                    <div class="qa-answer">
+                        <p><strong>Socially:</strong> Pronouns (she/her) and feminine presentation (clothes, hair, etc.). I believe I will keep my name, since I have no problem with it, but I will change it if I feel it is not the case anymore.</p>
+                        <p><strong>Medically:</strong> Hormone therapy (estrogen) to develop feminine traits like softer skin and curves. I've researched this extensively and will work with doctors and therapists to do it the right way.</p>
+                        <p><strong>Legally:</strong> Updating my gender marker on IDs eventually.</p>
+                    </div>
+                </div>
+                <div class="qa-item">
+                    <div class="qa-question">
+                        <i class="fas fa-question"></i>
+                        Will you have surgery?
+                    </div>
+                    <div class="qa-answer">
+                        <p>I will be focusing on hormones first. Surgeries (if any) would come much later, after careful consideration. Right now, it's not a priority, and quite frankly, they're too expensive and are mostly uncovered by health insurance.</p>
+                    </div>
+                </div>
+                <div class="qa-item">
+                    <div class="qa-question">
+                        <i class="fas fa-question"></i>
+                        What about your hobbies/interests?
+                    </div>
+                    <div class="qa-answer">
+                        <p>They won't change! I'll still love gaming, music, and my "masculine" hobbies. Being a woman doesn't mean fitting a stereotype—it means being me, just happier. I will be more sensitive due to female hormones, but other than that I might take up some new interests to accumulate myself to be more feminine. I don't have to completely change who I am to be a girl.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="qa-section">
+                <h2>Family Concerns</h2>
+                <div class="qa-item">
+                    <div class="qa-question">
+                        <i class="fas fa-question"></i>
+                        How can we adjust to your new name/pronouns?
+                    </div>
+                    <div class="qa-answer">
+                        <p>I know it'll take practice. Start small—maybe using them at home first. It's okay to slip up as long as you're trying. What matters is that you respect this part of me.</p>
+                    </div>
+                </div>
+                <div class="qa-item">
+                    <div class="qa-question">
+                        <i class="fas fa-question"></i>
+                        Will you still be the same person?
+                    </div>
+                    <div class="qa-answer">
+                        <p>Yes! My personality, memories, and love for you won't change. I'm just revealing a part of myself I've hidden. If anything, I'll be more present and joyful.</p>
+                    </div>
+                </div>
+                <div class="qa-item">
+                    <div class="qa-question">
+                        <i class="fas fa-question"></i>
+                        What if we're worried this is a mistake?
+                    </div>
+                    <div class="qa-answer">
+                        <p>I've spent months questioning and researching. Transitioning isn't impulsive—it's a carefully considered step toward my happiness. It's something that has been in the back of my head since High School, I just didn't realize it was there. I'd love to share resources I will use up at NAU to help you understand. Planned Parenthood is a good place to start, as well as the NAU Office of Inclusion.</p>
+                    </div>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 50px;">
+                <button class="button" data-section="poetry">Read My Poetry</button>
+            </div>
+        </section>
+
+        <!-- Poetry Section -->
+        <section id="poetry">
+            <h1>My Poetry</h1>
+            <p>Words from my heart during this journey.</p>
+            <div class="trans-flag"></div>
+            <div class="poetry-section">
+
+                <div class="poem">
+                    <div class="poem-title">Before the Before</div>
+                    <p>I was a theory of light<br>
+                    bending through someone else's prism—<br>
+                    <em>“You'll grow out of it,”</em> they said,<br>
+                    as if longing could be outgrown<br>
+                    like last year's shoes.<br>
+                    But the sky remembers<br>
+                    every shape I've whispered to it.</p>
+                </div>
+
+                <div class="poem">
+                    <div class="poem-title">Until I Found Her</div>
+                    <p>I didn't know how lost I was<br>
+                    until I saw her in the mirror—<br>
+                    not a stranger, but the echo<br>
+                    my ribs had been humming<br>
+                    since the first divide of cells.<br>
+                    <em>Please, wrap me in your glow...</em><br>
+                    She was the song<br>
+                    and I the unfinished lyric.</p>
+                </div>
+
+                <div class="poem">
+                    <div class="poem-title">The Argument of Light</div>
+                    <p>They say the soul has no gender.<br>
+                    Then why does mine orbit<br>
+                    this particular constellation?<br>
+                    Why do photons choose<br>
+                    to be waves <em>or</em> particles?<br>
+                    Even the universe takes sides<br>
+                    when no one's looking.</p>
+                </div>
+
+                <div class="poem">
+                    <div class="poem-title">Pharmacology of Stars</div>
+                    <p>Every estrogen molecule<br>
+                    contains a collapsed star—<br>
+                    ancient light waiting<br>
+                    to expand in my bloodstream.<br>
+                    I swallow supernovas.<br>
+                    My skin becomes<br>
+                    a slow explosion.</p>
+                </div>
+
+                <div class="poem">
+                <div class="poem-title">The Keeper of the Light</div>
+                <p>
+                    I am the keeper of the lighthouse.<br>
+                    My body is the tower—<br>
+                    all whitewashed stone and spiral stairs,<br>
+                    my ribs the cage around the flame.<br>
+                    The lantern room turns, turns, turns,<br>
+                    painting the fog with gold.<br>
+                    <em>This is what safety looks like,</em><br>
+                    I tell the ships. <em>Steer toward me.</em>
+                </p>
+
+                <p>
+                    But the darkness comes.<br>
+                    Not from the sea, but from below—<br>
+                    up the stairs, step by patient step,<br>
+                    a tide of black ink rising.<br>
+                    It licks at my ankles first,<br>
+                    cold as deadnames in strangers' mouths.<br>
+                    Then higher: the cling of wet wool<br>
+                    (a binder worn three days too long),<br>
+                    the choke of collar bones<br>
+                    remembering how they used to jut.
+                </p>
+
+                <p>
+                    I feed the flame. Throw open<br>
+                    the medicine cabinet mirror—<br>
+                    <em>see her, see her, see her—</em><br>
+                    but the dark has reached the landing now.<br>
+                    It peels the posters from the walls<br>
+                    (girls in sundresses, laughing),<br>
+                    dissolves them like sugar in tea.<br>
+                    The stairs creak under its weight.<br>
+                    Always climbing. Always hungry.
+                </p>
+
+                <p>
+                    When it finds me in the lantern room,<br>
+                    I'm clutching a vial of estrogen<br>
+                    to my chest like a crucifix.<br>
+                    The dark doesn't speak.<br>
+                    It <em>unspools</em>—<br>
+                    threads of shadow knitting themselves<br>
+                    into my father's voice:<br>
+                    <em>"You'll regret this."</em><br>
+                    Into the news anchor's smirk:<br>
+                    <em>"A phase."</em><br>
+                    Into the bathroom scale<br>
+                    that never shows the right number.
+                </p>
+
+                <p>
+                    The flame gutters. For a heartbeat,<br>
+                    I consider letting it die.<br>
+                    How easy to step into the dark,<br>
+                    let it wear my skin like an old coat.<br>
+                    But then—<br>
+                    a ship's horn in the distance.<br>
+                    Somewhere, a trans girl<br>
+                    is squinting through the storm,<br>
+                    steering toward my light.<br>
+                </p>
+
+                <p>
+                    So I pour the vial into the lamp.<br>
+                    The fire roars—<br>
+                    not gold now, but <em>pink-blue-white</em>,<br>
+                    the colors of our flag.<br>
+                    The dark screams as it burns.<br>
+                    It will return, of course.<br>
+                    Darkness always does.<br>
+                    But tonight, the beacon spins,<br>
+                    and the sea whispers back:<br>
+                    <em>Hold on. We're coming.</em>
+                </p>
+            </div>
+
+                <div class="poem">
+                    <div class="poem-title">Dear Universe</div>
+                    <p>You gave me this body<br>
+                    like a letter with no address.<br>
+                    <em>“Return to sender”</em> isn't an option.<br>
+                    So I rewrite the envelope<br>
+                    in the ink of my own blood—<br>
+                    forward it to myself<br>
+                    care of: <em>the future.</em></p>
+                </div>
+
+                <div class="poem">
+                    <div class="poem-title">The Theory of Almost</div>
+                    <p>There exists a parallel world<br>
+                    where I was born right.<br>
+                    She brushes her hair by the window,<br>
+                    unaware of the ghost<br>
+                    who wears her face like a debt.<br>
+                    We orbit each other,<br>
+                    twin stars separated<br>
+                    by the thinnest pane of glass.</p>
+                </div>
+
+                <div class="poem">
+                    <div class="poem-title">Alchemy</div>
+                    <p>
+                        I look now, out my stained-glass terrace—<br>
+                        its panes kissed by twilight's breath—<br>
+                        and see the child I used to be,<br>
+                        fingers twisting in hair too short,<br>
+                        wishing it could spill like a river.
+                    </p>
+                    <p>
+                        Then, the vial.<br>
+                        Dark as midnight, it trembles—<br>
+                        and bursts.
+                    </p>
+                    <p>
+                        A sigh of light.<br>
+                        His body unfolds: hips soften,<br>
+                        hair cascades past his shoulders.<br>
+                        For a breath, he is her.
+                    </p>
+                    <p>
+                        Then—the chains.<br>
+                        They lash from shadows,<br>
+                        slicing the transformation apart.<br>
+                        Tissue tears. Hair falls.<br>
+                        Back to the boy's tidy crop.<br>
+                        Only the ribbons remain, defiant.
+                    </p>
+                    <p>
+                        The lace comes after.<br>
+                        Always after.<br>
+                        Gilded thread weaves the vial whole,<br>
+                        sealing cracks with filigree.<br>
+                        A pretty repair.<br>
+                        A lie that almost looks like love.
+                    </p>
+                    <p>
+                        The child weeps.<br>
+                        For the body that betrays them twice—<br>
+                        once by changing,<br>
+                        once by unchanging.<br>
+                        And the terrace holds me,<br>
+                        a witness to their alchemy.
+                    </p>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 40px;">
+                <button class="button" data-section="resources">Helpful Resources</button>
+            </div>
+        </section>
+
+        <!-- Resources Section -->
+        <section id="resources">
+            <h1>Resources for Understanding</h1>
+            <p>Here are some resources that might help you understand my journey better.</p>
+            <div class="trans-flag"></div>
+            <div class="resources-grid">
+                <div class="resource-card">
+                    <h3>NAU Transgender Resources</h3>
+                    <p>Northern Arizona University's Office of Inclusion provides excellent resources for transgender students and their families.</p>
+                    <p><a href="https://in.nau.edu/inclusion/transgender-resources/" target="_blank">NAU Inclusion Resources</a></p>
+                </div>
+                <div class="resource-card">
+                    <h3>Planned Parenthood</h3>
+                    <p>Information about gender-affirming care and hormone therapy options.</p>
+                    <p><a href="https://www.plannedparenthood.org/get-care/our-services/gender-affirming-care" target="_blank">Gender-Affirming Care</a></p>
+                </div>
+                <div class="resource-card">
+                    <h3>PFLAG</h3>
+                    <p>Support for families and allies of LGBTQ+ individuals.</p>
+                    <p><a href="https://pflag.org" target="_blank">pflag.org</a></p>
+                </div>
+                <div class="resource-card">
+                    <h3>The Trevor Project</h3>
+                    <p>Crisis intervention and suicide prevention for LGBTQ+ youth.</p>
+                    <p><a href="https://www.thetrevorproject.org" target="_blank">thetrevorproject.org</a></p>
+                </div>
+                <div class="resource-card">
+                    <h3>Gender Spectrum</h3>
+                    <p>Education and support for gender diverse youth and their families.</p>
+                    <p><a href="https://www.genderspectrum.org" target="_blank">genderspectrum.org</a></p>
+                </div>
+                <div class="resource-card">
+                    <h3>Trans Lifeline</h3>
+                    <p>Peer support by trans people, for trans people.</p>
+                    <p><a href="https://translifeline.org" target="_blank">translifeline.org</a></p>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 50px;">
+                <button class="button" data-section="letter">Back to My Letter</button>
+            </div>
+        </section>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Navigation
+            const navItems = document.querySelectorAll('.nav-item');
+            const sections = document.querySelectorAll('section');
+            navItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    const sectionId = this.getAttribute('data-section');
+                    navItems.forEach(nav => nav.classList.remove('active'));
+                    this.classList.add('active');
+                    sections.forEach(section => {
+                        section.classList.remove('active');
+                        if (section.id === sectionId) {
+                            section.classList.add('active');
+                        }
+                    });
+                    document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
+                });
+            });
+            // Button navigation
+            const buttons = document.querySelectorAll('.button[data-section]');
+            buttons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const sectionId = this.getAttribute('data-section');
+                    navItems.forEach(nav => nav.classList.remove('active'));
+                    document.querySelector(`.nav-item[data-section="${sectionId}"]`).classList.add('active');
+                    sections.forEach(section => {
+                        section.classList.remove('active');
+                        if (section.id === sectionId) {
+                            section.classList.add('active');
+                        }
+                    });
+                    document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
+                });
+            });
+            // Personalization
+            const personalDetails = {
+                name: 'Aidan',
+                pronouns: 'she/her',
+                timeKnown: 'the past year',
+                transitionPlans: 'social transition (name, pronouns, presentation)'
+            };
+            document.getElementById('pronouns-display').textContent = personalDetails.pronouns;
+        });
+    </script>
+</body>
+</html>
